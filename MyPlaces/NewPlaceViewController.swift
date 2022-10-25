@@ -54,7 +54,7 @@ extension NewPlaceViewController: UITextFieldDelegate {
 }
 
 // MARK: Work with image
-extension NewPlaceViewController {
+extension NewPlaceViewController: UIImagePickerControllerDelegate {
     func chooseImagePicker(source: UIImagePickerController.SourceType) {
         
         if UIImagePickerController.isSourceTypeAvailable(source) {
