@@ -19,6 +19,10 @@ class NewPlaceViewController: UITableViewController {
     
     // MARK: Table view delegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let cameraIcon = #imageLiteral(resourceName: "camera")
+        let photoIcon = #imageLiteral(resourceName: "photo")
+        
         if indexPath.row == 0 {
             let actioSheet = UIAlertController(
                 title: nil,
@@ -28,9 +32,14 @@ class NewPlaceViewController: UITableViewController {
             let camera = UIAlertAction(title: "Camera", style: .default) { _ in
                 self.chooseImagePicker(source: .camera)
             }
+            camera.setValue(cameraIcon, forKey: "image")
+            
             let photo = UIAlertAction(title: "Photo", style: .default) { _ in
                 self.chooseImagePicker(source: .photoLibrary)
             }
+            
+            photo.setValue(photoIcon, forKey: "image")
+            
             let cancel = UIAlertAction(title: "Cancel", style: .cancel)
             
             actioSheet.addAction(camera)
