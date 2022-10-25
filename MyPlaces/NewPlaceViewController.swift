@@ -9,9 +9,12 @@ import UIKit
 
 class NewPlaceViewController: UITableViewController {
     
+    @IBOutlet var imageOfPlace: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        tableView.tableFooterView = UIView()
     }
     
     // MARK: Table view delegate
