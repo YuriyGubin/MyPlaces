@@ -8,6 +8,24 @@
 import UIKit
 
 class MainViewController: UITableViewController {
+    
+    let restaurantNames = [
+        "Burger Heroes",
+        "Kitchen",
+        "Bonsai",
+        "Дастархан",
+        "Индокитай",
+        "X.O",
+        "Балкан Гриль",
+        "Sherlock Holmes",
+        "Speak Easy",
+        "Morris Pub",
+        "Вкусные истории",
+        "Классик",
+        "Lova&Life",
+        "Шок",
+        "Бочка"
+    ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
