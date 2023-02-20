@@ -9,33 +9,16 @@ import UIKit
 
 class MainViewController: UITableViewController {
     
-    let restaurantNames = [
-        "Burger Heroes",
-        "Kitchen",
-        "Bonsai",
-        "Дастархан",
-        "Индокитай",
-        "X.O",
-        "Балкан Гриль",
-        "Sherlock Holmes",
-        "Speak Easy",
-        "Morris Pub",
-        "Вкусные истории",
-        "Классик",
-        "Love&Life",
-        "Шок",
-        "Бочка"
-    ]
+    let places = Place.getPlaces()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.rowHeight = 85
     }
 
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        restaurantNames.count
+        places.count
     }
 
     
@@ -43,10 +26,12 @@ class MainViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? CustomTableViewCell else { return UITableViewCell() }
         //var content = cell.defaultContentConfiguration()
         
-        let restaurant = restaurantNames[indexPath.row]
+        let restaurant = places[indexPath.row]
         
-        cell.nameLabel.text = restaurant
-        cell.imageOfPlace.image = UIImage(named: restaurant)
+        cell.nameLabel.text = restaurant.name
+        cell.locationLabel.text = restaurant.location
+        cell.typeLabel.text = restaurant.type
+        cell.imageOfPlace.image = UIImage(named: restaurant.image)
         cell.imageOfPlace.layer.cornerRadius = cell.imageOfPlace.frame.height / 2
         cell.imageOfPlace.clipsToBounds = true
         
