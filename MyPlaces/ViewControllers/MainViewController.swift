@@ -9,7 +9,7 @@ import UIKit
 
 class MainViewController: UITableViewController {
     
-    let places = Place.getPlaces()
+    var places = Place.getPlaces()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,12 +26,19 @@ class MainViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? CustomTableViewCell else { return UITableViewCell() }
         //var content = cell.defaultContentConfiguration()
         
-        let restaurant = places[indexPath.row]
+        let place = places[indexPath.row]
         
-        cell.nameLabel.text = restaurant.name
-        cell.locationLabel.text = restaurant.location
-        cell.typeLabel.text = restaurant.type
-        cell.imageOfPlace.image = UIImage(named: restaurant.image)
+        cell.nameLabel.text = place.name
+        cell.locationLabel.text = place.location
+        cell.typeLabel.text = place.type
+        
+        if place.image == nil {
+            cell.imageOfPlace.image = UIImage(named: place.restrauntImage!)
+        } else {
+            cell.imageOfPlace.image = place.image
+        }
+        
+        
         cell.imageOfPlace.layer.cornerRadius = cell.imageOfPlace.frame.height / 2
         cell.imageOfPlace.clipsToBounds = true
         
@@ -42,7 +49,14 @@ class MainViewController: UITableViewController {
         return cell
     }
     
-    @IBAction func cancelAction(_ segue: UIStoryboardSegue) {}
+    @IBAction func unwindSegue(_ segue: UIStoryboardSegue) {
+        
+        guard let newPlaceVC = segue.source as? NewPlaceViewController else { return }
+        newPlaceVC.saveNewPlace()
+        places.append(newPlaceVC.newPlace!)
+        
+        tableView.reloadData()
+    }
     
     // MARK: - Table view delegate
     

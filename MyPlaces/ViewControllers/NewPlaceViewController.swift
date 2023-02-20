@@ -9,12 +9,22 @@ import UIKit
 
 class NewPlaceViewController: UITableViewController {
     
+    var newPlace: Place?
+    var imageIsChanged = false
     
-    @IBOutlet var imageOfPlace: UIImageView!
+    @IBOutlet var saveButton: UIBarButtonItem!
+    
+    @IBOutlet var placeImage: UIImageView!
+    
+    @IBOutlet var placeNameTF: UITextField!
+    @IBOutlet var placeLocationTF: UITextField!
+    @IBOutlet var placeTypeTF: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        saveButton.isEnabled = false
+        
+        placeNameTF.addTarget(self, action: #selector(textFieldChanged), for: .editingChanged)
     }
     
     // MARK: Table view delegate
@@ -55,6 +65,31 @@ class NewPlaceViewController: UITableViewController {
             view.endEditing(true)
         }
     }
+    
+    func saveNewPlace() {
+        
+        var image: UIImage?
+        
+        if imageIsChanged {
+            image = placeImage.image
+        } else {
+            image = UIImage(named: "imagePlaceholder")
+        }
+        
+        newPlace = Place(
+            name: placeNameTF.text!,
+            location: placeLocationTF.text,
+            type: placeTypeTF.text,
+            image: image,
+            restrauntImage: nil
+        )
+    }
+    
+    // MARK: - @IBActions
+    
+    @IBAction func cancelAction() {
+        dismiss(animated: true)
+    }
 }
 
 // MARK: - Text field delegate
@@ -63,6 +98,14 @@ extension NewPlaceViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+    
+    @objc private func textFieldChanged() {
+        if placeNameTF.text?.isEmpty == false {
+            saveButton.isEnabled = true
+        } else {
+            saveButton.isEnabled = false
+        }
     }
 }
 
@@ -79,9 +122,12 @@ extension NewPlaceViewController: UIImagePickerControllerDelegate, UINavigationC
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        imageOfPlace.image = info[.editedImage] as? UIImage
-        imageOfPlace.contentMode = .scaleAspectFill
-        imageOfPlace.clipsToBounds = true
+        placeImage.image = info[.editedImage] as? UIImage
+        placeImage.contentMode = .scaleAspectFill
+        placeImage.clipsToBounds = true
+        
+        imageIsChanged = true
+        
         dismiss(animated: true)
     }
 }
