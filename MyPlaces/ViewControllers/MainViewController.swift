@@ -42,6 +42,8 @@ class MainViewController: UITableViewController {
         return cell
     }
     
+    @IBAction func cancelAction(_ segue: UIStoryboardSegue) {}
+    
     // MARK: - Table view delegate
     
 //    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
