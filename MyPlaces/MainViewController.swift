@@ -22,7 +22,7 @@ class MainViewController: UITableViewController {
         "Morris Pub",
         "Вкусные истории",
         "Классик",
-        "Lova&Life",
+        "Love&Life",
         "Шок",
         "Бочка"
     ]
@@ -40,10 +40,14 @@ class MainViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        var content = cell.defaultContentConfiguration()
+        
+        let restaurant = restaurantNames[indexPath.row]
+        
+        content.text = restaurant
+        
+        cell.contentConfiguration = content
         return cell
     }
     
