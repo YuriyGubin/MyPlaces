@@ -29,7 +29,7 @@ class MainViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        tableView.rowHeight = 80
     }
 
     // MARK: - Table view data source
@@ -46,6 +46,7 @@ class MainViewController: UITableViewController {
         let restaurant = restaurantNames[indexPath.row]
         
         content.text = restaurant
+        content.image = UIImage(named: restaurant)
         
         cell.contentConfiguration = content
         return cell
