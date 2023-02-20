@@ -29,7 +29,7 @@ class MainViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.rowHeight = 80
+        tableView.rowHeight = 85
     }
 
     // MARK: - Table view data source
@@ -47,10 +47,17 @@ class MainViewController: UITableViewController {
         
         content.text = restaurant
         content.image = UIImage(named: restaurant)
+        content.imageProperties.cornerRadius = tableView.rowHeight / 2
         
         cell.contentConfiguration = content
         return cell
     }
+    
+    // MARK: - Table view delegate
+    
+//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        85
+//    }
     
 
     /*
